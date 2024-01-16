@@ -1,7 +1,13 @@
 import { ApolloServer, gql } from "apollo-server";
-// 테스트
 
-const server = new ApolloServer({});
+// GET /allFilms
+
+const typeDefs = gql `
+  type Query{
+    allFilms: String
+  }
+`;
+const server = new ApolloServer({typeDefs});
 
 server.listen().then(({ url }) => {
   console.log(`Runnig on ${url}`);
