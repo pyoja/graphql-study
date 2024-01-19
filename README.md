@@ -22,6 +22,26 @@
 ### GraphQL은 원하는 정보를 쉽게 가져옴
 ![언더패칭2](https://github.com/pyoja/graphql-study/assets/113084653/80a2d6b2-2c09-4e97-b539-61ef8e76308a)
 
+# 설치 할 것
+```
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.8.1"
+  },
+```
+
+# 기본 코드 (server.js)
+```
+import { ApolloServer, gql } from "apollo-server";
+
+const server = new ApolloServer({});
+
+server.listen().then(({ url }) => {
+  console.log(`Runnig on ${url}`);
+});
+```
+
+
 # 예시 코드
 
 - 요청코드
