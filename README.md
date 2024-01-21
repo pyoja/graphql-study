@@ -34,6 +34,9 @@
 ```
 import { ApolloServer, gql } from "apollo-server";
 
+// query - GET
+// Mutationn - POST DELETE PUT
+
 const typeDefs = gql`
   type User {
     id: ID
@@ -48,12 +51,16 @@ const typeDefs = gql`
     allTweets: [Tweet]
     tweet(id: ID): Tweet
   }
+  type Mutation {
+    postTweet(text: String, userId: ID): Tweet
+  }
 `;
 const server = new ApolloServer({ typeDefs });
 
 server.listen().then(({ url }) => {
   console.log(`Runnig on ${url}`);
 });
+
 
 ```
 
