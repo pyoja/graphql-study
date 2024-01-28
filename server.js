@@ -4,6 +4,17 @@ import { ApolloServer, gql } from "apollo-server";
 // Mutationn - POST DELETE PUT
 // !가 없다면 null이 들어가도 됨 -> !가 붙었다면 꼭 값이 있어야함 (!=required)
 
+const tweets = [
+  {
+    id: "1",
+    text: "hello",
+  },
+  {
+    id: "2",
+    text: "hi",
+  },
+];
+
 const typeDefs = gql`
   type User {
     id: ID
@@ -12,7 +23,7 @@ const typeDefs = gql`
   type Tweet {
     id: ID!
     text: String!
-    author: User!
+    author: User
   }
   type Query {
     allTweets: [Tweet!]!
@@ -23,7 +34,19 @@ const typeDefs = gql`
     deleteTweet(id: ID!): Boolean!
   }
 `;
-const server = new ApolloServer({ typeDefs });
+
+const resolvers = {
+  Query: {
+    allTweets() {
+      return tweets;
+    },
+    tweet(root, { id }) {
+      return tweets.find((tweet) => tweet.id === id);
+    },
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
 
 server.listen().then(({ url }) => {
   console.log(`Runnig on ${url}`);
